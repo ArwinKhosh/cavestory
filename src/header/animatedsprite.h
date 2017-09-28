@@ -50,12 +50,6 @@ public:
 	 */
 	void draw(Graphics &graphics, int x, int y);
 
-	/* virtual void setupAnimation
-	 * in the end be a purely virtual function for the player class to implement
-	 * for now implement in this class
-	 * therefore: a required function that sets up all animations for a sprite
-	 */
-	virtual void setupAnimation();
 
 protected:
 	double m_timeToUpdate; 		    // Time between frames.
@@ -92,7 +86,14 @@ protected:
 	/* virtual void animationDone
 	 * Logic that happens when animation ends
 	 */
-	virtual void animationDone(std::string currentAnimation);
+	virtual void animationDone(std::string currentAnimation) = 0;
+
+	/* virtual void setupAnimation
+	 * in the end be a purely virtual function for the player class to implement
+	 * for now implement in this class
+	 * therefore: a required function that sets up all animations for a sprite
+	 */
+	virtual void setupAnimation() = 0;
 
 private:
 	std::map<std::string, std::vector<SDL_Rect>> m_animations;

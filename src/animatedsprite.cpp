@@ -18,7 +18,6 @@ AnimatedSprite::AnimatedSprite(Graphics &graphics, const std::string &filePath, 
 				m_visible(true),
 				m_currentAnimationOnce(false),
 				m_currentAnimation("")
-
 {
 
 }
@@ -54,10 +53,6 @@ void AnimatedSprite::stopAnimation()
 void AnimatedSprite::setVisible(bool visible)
 {
 	this->m_visible = visible;
-}
-
-void AnimatedSprite::animationDone(std::string currentAnimation)
-{
 }
 
 
@@ -118,18 +113,5 @@ void AnimatedSprite::draw(Graphics &graphics, int x, int y)
 		graphics.blitSurface(this->m_spriteSheet, &sourceRect, &destinationRectangle);
 	}
 
-}
-
-void AnimatedSprite::setupAnimation()
-{
-	std::vector<Vector2> runLeftFrames;
-	runLeftFrames.insert(runLeftFrames.end(), {Vector2(0, 0), Vector2(1, 0), Vector2(0, 0), Vector2(2, 0)});
-
-	this->addAnimation(runLeftFrames, "RunLeft", 16, 16, Vector2(0,0));
-
-	std::vector<Vector2> runRightFrames;
-	runRightFrames.insert(runRightFrames.end(), {Vector2(0, 1), Vector2(1, 1), Vector2(0, 1), Vector2(2, 1)});
-
-	this->addAnimation(runRightFrames, "RunRight", 16, 16, Vector2(0,0));
 }
 

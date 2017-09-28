@@ -32,9 +32,7 @@ void Game::gameLoop()
 	Input input;
 	SDL_Event event;
 
-	this->m_player = AnimatedSprite(graphics, "dat/sprites/MyChar.png",0, 0, 16, 16, 100, 100, 100);
-	this->m_player.setupAnimation();
-	this->m_player.playAnimation("RunRight");
+	this->m_player = Player(graphics, 100, 100);
 
 	int LAST_UPDATE_TIME_MS = SDL_GetTicks();
 
@@ -66,7 +64,27 @@ void Game::gameLoop()
 		}
 
 		if(input.wasKeyPressed(SDL_SCANCODE_ESCAPE) == true)
-		{return;}
+		{
+			// Will exit the game loop and thus quit the game.
+			return;
+		}
+		else if (input.isKeyHeld(SDL_SCANCODE_LEFT) == true)
+		{
+			// Move player to the left.
+			this->m_player.moveLeft();
+		}
+		else if (input.isKeyHeld(SDL_SCANCODE_RIGHT) == true)
+		{
+			// Move player to the right.
+			this->m_player.moveRight();
+		}
+
+		// If neither right or left key is being held, stop player.
+		if (!input.isKeyHeld(SDL_SCANCODE_LEFT) && !input.isKeyHeld(SDL_SCANCODE_RIGHT))
+		{
+			this->m_player.stopMoving();
+		}
+
 
 		const int CURRENT_UPDATE_TIME_MS = SDL_GetTicks();
 		int ELAPSED_TIME_MS = CURRENT_UPDATE_TIME_MS - LAST_UPDATE_TIME_MS;
@@ -83,7 +101,7 @@ void Game::draw(Graphics &graphics)
 {
 	// clear any previous content
 	graphics.clear();
-	this->m_player.draw(graphics, 100, 100);
+	this->m_player.draw(graphics);
 	graphics.flip();
 }
 
