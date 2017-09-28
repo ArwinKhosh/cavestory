@@ -23,6 +23,7 @@ Graphics::~Graphics()
 
 SDL_Surface* Graphics::loadImage(const std::string &filePath)
 {
+	// check if the image has been loaded before
 	if (this->m_spriteSheets.count(filePath) == 0)
 	{
 		//RHS function wants a char* as input, not a std:string

@@ -41,10 +41,12 @@ public:
 	 *
 	 */
 	void draw(Graphics &graphics, int x, int y);
-private:
+
+protected:
 	SDL_Rect m_sourceRect;
 	SDL_Texture* m_spriteSheet;
 
+private:
 	float m_x, m_y;
 };
 

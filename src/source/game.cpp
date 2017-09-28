@@ -12,7 +12,7 @@
 namespace
 {
 	const int FPS = 50;
-	const int MAX_FRAME_TIME = 1000/FPS;
+	const int MAX_FRAME_TIME = 5 * 1000/FPS;
 }
 
 Game::Game()
@@ -32,7 +32,9 @@ void Game::gameLoop()
 	Input input;
 	SDL_Event event;
 
-	this->m_player = Sprite(graphics, "dat/sprites/MyChar.png",0, 0, 16, 16, 100, 100);
+	this->m_player = AnimatedSprite(graphics, "dat/sprites/MyChar.png",0, 0, 16, 16, 100, 100, 100);
+	this->m_player.setupAnimation();
+	this->m_player.playAnimation("RunRight");
 
 	int LAST_UPDATE_TIME_MS = SDL_GetTicks();
 
@@ -87,6 +89,7 @@ void Game::draw(Graphics &graphics)
 
 void Game::update(float elapsedTime)
 {
+	this->m_player.update(elapsedTime);
 }
 
 
